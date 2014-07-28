@@ -22,7 +22,7 @@ function varargout = gui_setup(varargin)
 
 % Edit the above text to modify the response to help gui_setup
 
-% Last Modified by GUIDE v2.5 17-Jul-2014 23:57:12
+% Last Modified by GUIDE v2.5 28-Jul-2014 14:23:48
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -212,18 +212,18 @@ end
 
 
 
-function edit8_Callback(hObject, eventdata, handles)
-% hObject    handle to edit8 (see GCBO)
+function operationFrequency_Callback(hObject, eventdata, handles)
+% hObject    handle to operationFrequency (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit8 as text
-%        str2double(get(hObject,'String')) returns contents of edit8 as a double
+% Hints: get(hObject,'String') returns contents of operationFrequency as text
+%        str2double(get(hObject,'String')) returns contents of operationFrequency as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit8_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit8 (see GCBO)
+function operationFrequency_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to operationFrequency (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -234,19 +234,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in popupmenu1.
-function popupmenu1_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu1 (see GCBO)
+% --- Executes on selection change in selectConnection.
+function selectConnection_Callback(hObject, eventdata, handles)
+% hObject    handle to selectConnection (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu1 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu1
+% Hints: contents = cellstr(get(hObject,'String')) returns selectConnection contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from selectConnection
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu1 (see GCBO)
+function selectConnection_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to selectConnection (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -258,18 +258,18 @@ end
 
 
 
-function edit11_Callback(hObject, eventdata, handles)
-% hObject    handle to edit11 (see GCBO)
+function lineVoltage_ca_Callback(hObject, eventdata, handles)
+% hObject    handle to lineVoltage_ca (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit11 as text
-%        str2double(get(hObject,'String')) returns contents of edit11 as a double
+% Hints: get(hObject,'String') returns contents of lineVoltage_ca as text
+%        str2double(get(hObject,'String')) returns contents of lineVoltage_ca as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit11_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit11 (see GCBO)
+function lineVoltage_ca_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to lineVoltage_ca (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -281,18 +281,18 @@ end
 
 
 
-function edit10_Callback(hObject, eventdata, handles)
-% hObject    handle to edit10 (see GCBO)
+function lineVoltage_bc_Callback(hObject, eventdata, handles)
+% hObject    handle to lineVoltage_bc (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit10 as text
-%        str2double(get(hObject,'String')) returns contents of edit10 as a double
+% Hints: get(hObject,'String') returns contents of lineVoltage_bc as text
+%        str2double(get(hObject,'String')) returns contents of lineVoltage_bc as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit10_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit10 (see GCBO)
+function lineVoltage_bc_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to lineVoltage_bc (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -304,18 +304,18 @@ end
 
 
 
-function edit9_Callback(hObject, eventdata, handles)
-% hObject    handle to edit9 (see GCBO)
+function lineVoltage_ab_Callback(hObject, eventdata, handles)
+% hObject    handle to lineVoltage_ab (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit9 as text
-%        str2double(get(hObject,'String')) returns contents of edit9 as a double
+% Hints: get(hObject,'String') returns contents of lineVoltage_ab as text
+%        str2double(get(hObject,'String')) returns contents of lineVoltage_ab as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit9_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit9 (see GCBO)
+function lineVoltage_ab_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to lineVoltage_ab (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -327,18 +327,18 @@ end
 
 
 
-function edit14_Callback(hObject, eventdata, handles)
-% hObject    handle to edit14 (see GCBO)
+function lineCurrent_ca_Callback(hObject, eventdata, handles)
+% hObject    handle to lineCurrent_ca (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit14 as text
-%        str2double(get(hObject,'String')) returns contents of edit14 as a double
+% Hints: get(hObject,'String') returns contents of lineCurrent_ca as text
+%        str2double(get(hObject,'String')) returns contents of lineCurrent_ca as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit14_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit14 (see GCBO)
+function lineCurrent_ca_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to lineCurrent_ca (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -350,18 +350,18 @@ end
 
 
 
-function edit13_Callback(hObject, eventdata, handles)
-% hObject    handle to edit13 (see GCBO)
+function lineCurrent_bc_Callback(hObject, eventdata, handles)
+% hObject    handle to lineCurrent_bc (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit13 as text
-%        str2double(get(hObject,'String')) returns contents of edit13 as a double
+% Hints: get(hObject,'String') returns contents of lineCurrent_bc as text
+%        str2double(get(hObject,'String')) returns contents of lineCurrent_bc as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit13_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit13 (see GCBO)
+function lineCurrent_bc_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to lineCurrent_bc (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -373,18 +373,18 @@ end
 
 
 
-function edit12_Callback(hObject, eventdata, handles)
-% hObject    handle to edit12 (see GCBO)
+function lineCurrent_ab_Callback(hObject, eventdata, handles)
+% hObject    handle to lineCurrent_ab (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit12 as text
-%        str2double(get(hObject,'String')) returns contents of edit12 as a double
+% Hints: get(hObject,'String') returns contents of lineCurrent_ab as text
+%        str2double(get(hObject,'String')) returns contents of lineCurrent_ab as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit12_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit12 (see GCBO)
+function lineCurrent_ab_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to lineCurrent_ab (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
