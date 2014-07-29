@@ -280,6 +280,7 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
+
 function lineVoltage_bc_Callback(hObject, eventdata, handles)
 % hObject    handle to lineVoltage_bc (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -304,15 +305,14 @@ end
 
 
 function lineVoltage_ab_Callback(hObject, eventdata, handles)
+% hObject    handle to lineVoltage_ab (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
 
-lineVoltage_ab = str2double(get(hObject,'string'));
-if isnan(lineVoltage_ab)
-  errordlg('Ingrese un valor númerico','Bad Input','modal')
-else 
-  phaseVoltage_an = testing;
-end
+% Hints: get(hObject,'String') returns contents of lineVoltage_ab as text
+%        str2double(get(hObject,'String')) returns contents of lineVoltage_ab as a double
 
-
+testing = get(hOBject)
 
 % --- Executes during object creation, after setting all properties.
 function lineVoltage_ab_CreateFcn(hObject, eventdata, handles)
