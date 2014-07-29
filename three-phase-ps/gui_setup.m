@@ -246,7 +246,6 @@ function selectConnection_Callback(hObject, eventdata, handles)
 
 % --- Executes during object creation, after setting all properties.
 function selectConnection_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to selectConnection (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -281,12 +280,9 @@ end
 
 
 function lineVoltage_bc_Callback(hObject, eventdata, handles)
-% hObject    handle to lineVoltage_bc (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of lineVoltage_bc as text
-%        str2double(get(hObject,'String')) returns contents of lineVoltage_bc as a double
+  lineVoltage_bc = getappdata(handles.lineVoltage_ab,'lineVoltage_ab')
+  lineVoltage_bc = num2str(lineVoltage_bc)
+  get(handles.lineVoltage_bc,'String',lineVoltage_bc);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -309,7 +305,7 @@ lineVoltage_ab = str2double(get(hObject,'string'));
 if isnan(lineVoltage_ab)
   errordlg('Ingrese un valor númerico','Bad Input','modal')
 else 
-  phaseVoltage_an = testing;
+  setappdata(handles.lineVoltage_ab,'lineVoltage_ab',lineVoltage_ab);
 end
 
 
