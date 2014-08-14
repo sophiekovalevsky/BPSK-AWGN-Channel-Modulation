@@ -31,49 +31,61 @@ erroBit = bitDuration/2;
 
 % Values to BER in dB
 berdB = [1:90];
+berdBLength = berdB;
+
+% Upsample factors
+upsampleFactors = [1:4];
+upsFacLength = length(upsampleFactors);
 
 % Carrier frequency
 carrierFrequency = 50;
 
-% Upsample factors
-upsampleFactors = [1:4];
+% Run for every unsampled factors
+for upsFacIndex = 1:upsFacLength
+	% Upsample the unipolar sequence and get the vector length
+	upsampleSequence = upsample(bipolarSequence, upsampleFactors(upsFacIndex));
+	upsSeqLength = length(upsampleSequence);
 
-% Upsample the unipolar sequence and get the vector length
-upsampleSequence = upsample(bipolarSequence, upsampleFactors(3));
-upsSeqLength = length(upsampleSequence);
+	% Rectangular filter 
+	rectFilter = ones(1, upsampleFactors(upsFacIndex));
 
-% Rectangular filter 
-rectFilter = ones(1, upsampleFactors(3));
+	% Convolve upsample unipolar sequence with a rectangular filter
+	convSequence = conv(upsampleSequence, rectFilter);
 
-% Convolve upsample unipolar sequence with a rectangular filter
-convSequence = conv(upsampleSequence, rectFilter);
+	% Retain just only the value with a upsampleSequence
+	seqFiltered = convSequence(1:upsSeqLength);
 
-% Retain just only the value with a upsampleSequence
-seqFiltered = convSequence(1:upsSeqLength);
+	% Generate the White Gaussian Noise with 0 dB variance
+	whiGauNoise = 1/sqrt(2)*[randn(1,upsSeqLength) + j*randn(1,upsSeqLength)];
 
-% Generate the White Gaussian Noise with 0 dB variance
-whiGauNoise = 1/sqrt(2)*[randn(1,upsSeqLength) + j*randn(1,upsSeqLength)];
+	% Testing values
+	moduSignal = 10;
 
-% Testing values
-moduSignal = 10;
+	% Signal modulated
+	%moduSignal = sqrt(2*errorBit/bitDuration)*cos(2*pi*carrierFrequency*t);
 
-% Add the Noise to the channel
-transSignal = moduSignal + 10^(-berdB(1)/20)*whiGauNoise; 
- 
-% Demodulating the signal and use matched filter
-demSignalFilt = conv(transSignal,rectFilter); 
 
-% I need to sample  the demodulated signal filtered 
-demSignalSample = 4;
+	% Run for every berdB
+	for berdBIndex = 1:berdBLength
+		% Add the Noise to the channel
+		transSignal = moduSignal + 10^(-berdB(berdBIndex)/20)*whiGauNoise; 
+		 
+		% Demodulating the signal and use matched filter
+		demSignalFilt = conv(transSignal,rectFilter); 
 
-% Extract sequence using hard decision decoding with a threshold value of 0
-binSeqDem = real(demSignalSample) > 0;
+		% I need to sample  the demodulated signal filtered 
+		demSignalSample = 4;
 
-% Count the bits error
-errorBitsValue(1) = length(find([binarySequence - binSeqDem]));
+		% Extract sequence using hard decision decoding with a threshold value of 0
+		binSeqDem = real(demSignalSample) > 0;
 
-%figure(1)
-%plot(timeSequence,upsampleSequence);
+		% Count the bits error
+		errorBitsValue(berdBIndex) = length(find([binarySequence - binSeqDem]));
 
-% Signal modulated
-%%w = sqrt(2*errorBit/bitDuration)*cos(2*pi*carrierFrequency*t); 
+		%figure(1)
+		%plot(timeSequence,upsampleSequence);
+	end
+
+end 
+
+
