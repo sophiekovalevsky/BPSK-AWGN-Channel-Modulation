@@ -60,7 +60,18 @@ moduSignal = 10;
 % Add the Noise to the channel
 transSignal = moduSignal + 10^(-berdB(1)/20)*whiGauNoise; 
  
- 
+% Demodulating the signal and use matched filter
+demSignalFilt = conv(transSignal,rectFilter); 
+
+% I need to sample  the demodulated signal filtered 
+demSignalSample = 4;
+
+% Extract sequence using hard decision decoding with a threshold value of 0
+binSeqDem = real(demSignalSample) > 0;
+
+% Count the bits error
+errorBitsValue(1) = length(find([binarySequence - binSeqDem]));
+
 %figure(1)
 %plot(timeSequence,upsampleSequence);
 
