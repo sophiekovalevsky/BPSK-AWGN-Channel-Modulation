@@ -1,4 +1,3 @@
-
 % Clear all variables
 % Close all figures
 
@@ -13,6 +12,7 @@ sequenceStructure = load('binary_sequence');
 
 % Extract binary sequence fields
 binarySequence = cell2mat(extractfield(sequenceStructure, 'ip'));
+binSeqLength = length(binarySequence);
 
 % Convert binary sequence to bipolar sequence
 bipolarSequence = 2*binarySequence-1;
@@ -30,8 +30,9 @@ sampleFrequency = 5/bitDuration;
 erroBit = bitDuration/2;
 
 % Values to BER in dB
-berdB = [1:90];
-berdBLength = berdB;
+eBn0 = [0:12];
+eBn0Length = length(eBn0);
+eBn0Max = max(eBn0);
 
 % Upsample factors
 upsampleFactors = [1:4];
@@ -50,7 +51,7 @@ for upsFacIndex = 1:upsFacLength
 	rectFilter = ones(1, upsampleFactors(upsFacIndex));
 
 	% Convolve upsample unipolar sequence with a rectangular filter
-	convSequence = conv(upsampleSequence, rectFilter);
+	convSequence = 1/sqrt(upsampleFactors(upsFacIndex))*conv(upsampleSequence, rectFilter);
 
 	% Retain just only the value with a upsampleSequence
 	seqFiltered = convSequence(1:upsSeqLength);
@@ -59,33 +60,47 @@ for upsFacIndex = 1:upsFacLength
 	whiGauNoise = 1/sqrt(2)*[randn(1,upsSeqLength) + j*randn(1,upsSeqLength)];
 
 	% Testing values
-	moduSignal = 10;
+	moduSignal = seqFiltered;
 
 	% Signal modulated
 	%moduSignal = sqrt(2*errorBit/bitDuration)*cos(2*pi*carrierFrequency*t);
 
 
-	% Run for every berdB
-	for berdBIndex = 1:berdBLength
+	% Run for every eBn0
+	for eBn0Index = 1:eBn0Length
 		% Add the Noise to the channel
-		transSignal = moduSignal + 10^(-berdB(berdBIndex)/20)*whiGauNoise; 
+		transSignal = moduSignal + 10^(-eBn0(eBn0Index)/20)*whiGauNoise; 
 		 
 		% Demodulating the signal and use matched filter
 		demSignalFilt = conv(transSignal,rectFilter); 
 
 		% I need to sample  the demodulated signal filtered 
-		demSignalSample = 4;
+		demSignalSample = demSignalFilt(upsampleFactors(upsFacIndex):upsampleFactors(upsFacIndex):upsSeqLength); 
 
 		% Extract sequence using hard decision decoding with a threshold value of 0
 		binSeqDem = real(demSignalSample) > 0;
 
 		% Count the bits error
-		errorBitsValue(berdBIndex) = length(find([binarySequence - binSeqDem]));
-
-		%figure(1)
-		%plot(timeSequence,upsampleSequence);
+		errorBitsValue(eBn0Index) = length(find([binarySequence - binSeqDem]));
 	end
 
-end 
+	% Get the simulated BER
+	berSimulated(upsFacIndex,:) = errorBitsValue./binSeqLength; 
 
+	% Get the theorical BER
+	berTheory = 0.5*erfc(sqrt(10.^(eBn0/10)));
+
+	% Show figure of the differents BER vs AWGN Channel for every upsample factor
+	figure
+	semilogy(eBn0,berTheory,'rs-','Linewidth',2);
+	hold on
+	semilogy(eBn0,berSimulated(upsFacIndex,:),'bx-','Linewidth',2);
+	grid on
+	axis([0 eBn0Max 10^-8 0.1])
+	legend('Teórico', 'Simulado');
+	xlabel('Eb/N0, dB');
+	ylabel('BER');
+	title('BER en función de Eb/N0 en canal AWGN');
+
+end 
 
