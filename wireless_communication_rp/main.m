@@ -57,7 +57,7 @@ for upsFacIndex = 1:upsFacLength
 	seqFiltered = convSequence(1:upsSeqLength);
 
 	% Generate the White Gaussian Noise with 0 dB variance
-	whiGauNoise = 1/sqrt(2)*[randn(1,upsSeqLength) + j*randn(1,upsSeqLength)];
+	whiGauNoise = 1/sqrt(2)*randn(1,upsSeqLength);
 
 	% Testing values
 	moduSignal = seqFiltered;
