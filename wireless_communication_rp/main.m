@@ -4,16 +4,16 @@
 clear all;
 close all;
 
-% Generate a binary sequence Pr(0) = 0.5 and Pr(1) = 0.5
-binarySequence = rand(1,10e6)>0.5;
-binSeqLength = 10e6;
+% % Generate a binary sequence Pr(0) = 0.5 and Pr(1) = 0.5
+% binarySequence = rand(1,10e5)>0.5;
+% binSeqLength = 10e5;
 
-% % Load binary sequence from binary_sequence.mat
-% sequenceStructure = load('binary_sequence');
-% 
-% % Extract binary sequence fields
-% binarySequence = cell2mat(extractfield(sequenceStructure, 'ip'));
-% binSeqLength = length(binarySequence);
+% Load binary sequence from binary_sequence.mat
+sequenceStructure = load('binary_sequence');
+
+% Extract binary sequence fields
+binarySequence = cell2mat(extractfield(sequenceStructure, 'ip'));
+binSeqLength = length(binarySequence);
 
 % Convert binary sequence to bipolar sequence
 bipolarSequence = 2*binarySequence-1;
@@ -57,7 +57,7 @@ for upsFacIndex = 1:upsFacLength
 	upsSeqLength = length(upsampleSequence);
 
 	% Rectangular filter 
-	rectFilter = ones(1, upsampleFactors(upsFacIndex))
+	rectFilter = ones(1, upsampleFactors(upsFacIndex));
 
 	% Convolve upsample unipolar sequence with a rectangular filter
 	convSequence = 1/sqrt(upsampleFactors(upsFacIndex))*conv(upsampleSequence, rectFilter);
