@@ -3,7 +3,7 @@
 
 clear all;
 close all;
-
+ 
 % % Generate a binary sequence Pr(0) = 0.5 and Pr(1) = 0.5
 % binarySequence = rand(1,10e5)>0.5;
 % binSeqLength = 10e5;
@@ -87,7 +87,7 @@ for upsFacIndex = 1:upsFacLength
 		demSignalSample = demSignalFilt(upsampleFactors(upsFacIndex)*sampleFrequency:upsampleFactors(upsFacIndex)*sampleFrequency:upsSeqLength);
 
 		% Extract sequence using hard decision decoding with a threshold value of 0
-		binSeqDem = real(demSignalSample) > 0;
+		binSeqDem = demSignalSample > 0;
 
 		% Count the bits error
 		errorBitsValue(eBn0Index) = length(find([binarySequence - binSeqDem]));
