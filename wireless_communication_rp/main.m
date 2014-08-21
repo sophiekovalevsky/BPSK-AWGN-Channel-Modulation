@@ -39,9 +39,6 @@ eBn0Max = max(eBn0);
 upsampleFactors = [1:4];
 upsFacLength = length(upsampleFactors);
 
-% Carrier frequency of 50 Hz
-carrierFrequency = 50;
-
 % Run for every unsampled factors
 for upsFacIndex = 1:upsFacLength
 
@@ -60,7 +57,7 @@ for upsFacIndex = 1:upsFacLength
 	rectFilter = ones(1, upsampleFactors(upsFacIndex));
 
 	% Convolve upsample unipolar sequence with a rectangular filter
-	convSequence = 1/sqrt(upsampleFactors(upsFacIndex))*conv(upsampleSequence, rectFilter);
+	convSequence = 1/sqrt(upsampleFactors(upsFacIndex))*conv(upsampleSequence,rectFilter);
 
 	% Retain just only the value with a upsampleSequence
 	seqFiltered = convSequence(1:upsSeqLength);
@@ -68,12 +65,8 @@ for upsFacIndex = 1:upsFacLength
 	% Generate the White Gaussian Noise with 0 dB variance
 	whiGauNoise = 1/sqrt(2)*randn(1,upsSeqLength);
 
-	% Testing values
+	% Send the sequence filtered as a modulated signal
 	moduSignal = seqFiltered;
-
-	% Signal modulated
-	%moduSignal = sqrt(2*energyBit/bitDuration)*cos(2*pi*carrierFrequency*t);
-
 
 	% Run for every eBn0
 	for eBn0Index = 1:eBn0Length
@@ -105,7 +98,7 @@ for upsFacIndex = 1:upsFacLength
 	hold on
 	semilogy(eBn0,berSimulated(upsFacIndex,:),'bx-','Linewidth',2);
 	grid on
-	axis([0 eBn0Max 10^-8 0.1])
+	axis([0 6 10^-3 0.1])
 	legend('Teórico', 'Simulado');
 	xlabel('Eb/N0, dB');
 	ylabel('BER');
