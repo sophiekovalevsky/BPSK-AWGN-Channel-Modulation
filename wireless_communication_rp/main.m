@@ -27,9 +27,6 @@ sampleFrequency = 5/bitDuration;
 % Duration of signal to generate in us
 T = bitDuration*binSeqLength;
 
-% Error bit used to normalized the amplitude of the signal
-energyBit = bitDuration/2;
-
 % Values to BER in dB
 eBn0 = [0:12];
 eBn0Length = length(eBn0);
