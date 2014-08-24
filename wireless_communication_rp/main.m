@@ -91,7 +91,19 @@ for upsFacIndex = 1:upsFacLength
 
 	% Get the theorical BER
 	berTheory = 0.5*erfc(sqrt(10.^(eBn0/10)));
+    
+    % Length of the power spectral density
+    lengthPSD = 2048;
 
+    % Get the power spectral density
+    signalPSD = pwelch(moduSignal,[],[],lengthPSD,sampleFrequency,'twosided');
+    
+    % Set the dc component to the origin and the PSD Watts/Hz into dB/Hz
+    signalPsdCentered = 10*log10(fftshift(signalPSD));
+    
+    % Create the frequency vector to plot the PSD
+    freVector = [-lengthPSD/2:(lengthPSD-1)/2]*sampleFrequency/lengthPSD;
+        
 	% Show figure of the differents BER vs AWGN Channel for every upsample factor
 	figure
 	semilogy(eBn0,berTheory,'rs-','Linewidth',2);
@@ -100,9 +112,17 @@ for upsFacIndex = 1:upsFacLength
 	grid on
 	axis([0 6 10^-3 0.1])
 	legend('Teórico', 'Simulado');
-	xlabel('Eb/N0, dB');
+	xlabel('Eb/N0 (dB)');
 	ylabel('BER');
 	title('BER en función de Eb/N0 en canal AWGN');
-
+    
+    % Show figure of PSD signal modulated
+    figure
+    plot(freVector,signalPsdCentered,'k','LineWidth',2);
+    grid on
+    axis([-1.5 1.5 -62 5])
+    xlabel('Frecuencia (MHz)');
+    ylabel('Densidad espectral de potencia (dB/Hz)');
+    title('PSD vs Frecuencia para Tb = 1\mus');
 end 
 
