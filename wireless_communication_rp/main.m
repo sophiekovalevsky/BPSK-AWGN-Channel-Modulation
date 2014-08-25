@@ -112,14 +112,14 @@ for upsFacIndex = 1:upsFacLength
 	xlabel('Eb/N0 (dB)');
 	ylabel('BER');
 	title('BER en función de Eb/N0 en canal AWGN');
-    
-    % Show figure of PSD signal modulated
-    figure
-    plot(freVector,signalPsdCentered,'k','LineWidth',2);
-    grid on
-    axis([-1.5 1.5 -62 5])
-    xlabel('Frecuencia (MHz)');
-    ylabel('Densidad espectral de potencia (dB/Hz)');
-    title('PSD vs Frecuencia para Tb = 1\mus');
+	    
+	    % Show figure of PSD signal modulated
+	    figure
+	    plot(freVector,signalPsdCentered,'k','LineWidth',2);
+	    grid on
+	    axis([-1.5 1.5 -62 5])
+	    xlabel('Frecuencia (MHz)');
+	    ylabel('Densidad espectral de potencia (dB/Hz)');
+	    title('PSD vs Frecuencia para Tb = 1\mus');
 end 
 
